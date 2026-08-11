@@ -14,10 +14,10 @@ Not tied to any one agent: it is a folder of markdown, so it runs on Claude Code
 [![License](https://img.shields.io/badge/license-MIT-3DA639?style=flat&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Author](https://img.shields.io/badge/by-Turki%20Alshuaibi-1B4DD1?style=flat)](https://turkialshuaibi.com/)
 
-**[turki-sh.github.io/Foreman](https://turki-sh.github.io/Foreman/)**
+**[foreman.turkialshuaibi.com](https://foreman.turkialshuaibi.com/)**
 
 <p align="center">
-  <a href="https://turki-sh.github.io/Foreman/">
+  <a href="https://foreman.turkialshuaibi.com/">
     <img src="docs/screenshot.png" alt="The Foreman site: a technical sheet on white paper, with a hand-drawn wireframe annotated with the decisions the interview forces." width="820">
   </a>
 </p>
@@ -32,9 +32,9 @@ You do not read Foreman. Your agent does.
 
 ## Install
 
-Foreman is one folder of markdown. There is nothing to compile and nothing to run, so it installs anywhere an agent can read files. Claude Code is listed first only because it is the one that takes a single command, not because the playbook is built for it.
+Foreman is one folder of markdown. Nothing compiles, nothing runs, so it installs anywhere an agent reads files.
 
-**Claude Code.** Type both lines, in this order. The marketplace is named `alshuaibi`, so the install id is `foreman@alshuaibi`.
+**Claude Code.** Both lines, in this order.
 
 ```
 /plugin marketplace add Turki-Sh/Foreman

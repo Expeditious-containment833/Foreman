@@ -9,7 +9,7 @@ Its governing claim is that the quality of an agent's output is bounded by the q
 Author: Turki Alshuaibi, AI engineer, Saudi Arabia. Released under MIT.
 
 ## Pages
-- [/](https://turki-sh.github.io/Foreman/): what Foreman is, what changes when you use it, the seven phases and their gates, and install instructions for Claude Code, Claude apps, and other coding agents.
+- [/](https://foreman.turkialshuaibi.com/): what Foreman is, what changes when you use it, the seven phases and their gates, and install instructions for Claude Code, Claude apps, and other coding agents.
 
 ## Source
 - Repository: https://github.com/Turki-Sh/Foreman

@@ -41,6 +41,22 @@ If the project is under NDA or unshippable, say what class of problem it was and
 
 Two or three sentences. Pick first person or third person and hold it across the whole site. Cut every clause that a hundred other people in their field could also write. Where they came from matters only if it explains where they are going.
 
+## Never justify the page to the reader
+
+The strongest tell of machine-written copy, after the accented word, is prose that defends its own decisions. It explains why a list is ordered the way it is, why a default was picked, what a section is not claiming, what the author does not mean. The reader did not ask, did not notice, and now suspects there was something to hide.
+
+> Claude Code is listed first only because it is the one that takes a single command, not because the playbook is built for it.
+
+Nobody wondered. The sentence invents an objection, argues with it, and leaves the reader thinking about install-order politics instead of installing.
+
+Cut every clause of this shape: "only because", "not because", "this is not to say", "it is worth noting that", "that said", "to be clear", "the reason for this is". Cut the pre-emptive apology and the parenthetical that softens the sentence before it.
+
+**If an ordering needs defending, the ordering is wrong.** Change the order rather than annotating it.
+
+**The delete test.** Remove the sentence and read the paragraph again. If nothing is lost, it was justification. This is true of roughly every sentence that explains a choice the reader can already see.
+
+Confidence reads as authority. Explanation reads as doubt.
+
 ## Rules you enforce
 
 - No claim without evidence on the page or one click away.

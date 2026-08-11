@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://turki-sh.github.io/Foreman/sitemap.xml
+Sitemap: https://foreman.turkialshuaibi.com/sitemap.xml

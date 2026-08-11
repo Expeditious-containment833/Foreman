@@ -108,6 +108,7 @@ Watch for these throughout, not just at the end:
 
 - Delegating decisions instead of delegating typing. Produces default slop. You cause this one yourself the moment you present a finished visual system instead of variants they chose from.
 - Accenting one word of a headline in the brand colour. The single most common tell that a machine set the type. See `references/design-direction.md`.
+- Copy that justifies its own decisions to the reader: "listed first only because", "this is not to say", "it is worth noting". You will write these by reflex. Delete them. See `references/content-interview.md`.
 - No non-goals. Produces a carousel nobody asked for.
 - Big-bang prompting. Produces output they cannot verify.
 - Trusting the desktop render. Produces a site that breaks on the device most visitors use.
