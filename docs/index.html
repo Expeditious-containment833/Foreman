@@ -239,7 +239,9 @@
   /* ---------- header ---------- */
 
   header { border-bottom: 1px solid var(--hair); }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; }
+  /* .bar and .hero sit on the same element as .wrap, so a padding shorthand here
+     wipes out the gutter .wrap sets. Keep var(--gut) in the shorthand. */
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem var(--gut); }
   .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.0625rem; letter-spacing: -.01em; }
   .brand img { width: 30px; height: 30px; display: block; image-rendering: pixelated; }
   .bar nav { display: flex; gap: 1.1rem; align-items: center; }
@@ -256,9 +258,10 @@
 
   /* ---------- hero ---------- */
 
-  .hero { padding: 3.5rem 0 3rem; }
+  .hero { padding: 3.5rem var(--gut) 3rem; }
   .hero .cols { display: grid; grid-template-columns: 1.08fr .92fr; gap: 3.25rem; align-items: start; }
   .hero h1 { margin: 1.1rem 0 1.25rem; max-width: 12ch; }
+
 
   /* ---------- the headline, drawn ----------
      On hover the letterforms become cutouts onto a blueprint sheet, revealed in
@@ -290,6 +293,9 @@
     background-position: var(--mx, 50%) var(--my, 50%), var(--mx, 50%) var(--my, 50%), 0 0;
     -webkit-background-clip: text;
     background-clip: text;
+    /* Safari paints the glyph fill from -webkit-text-fill-color, so colour
+       alone leaves the letters solid and the effect never appears. */
+    -webkit-text-fill-color: transparent;
 
     --reveal: 0px;
     -webkit-mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
@@ -490,7 +496,7 @@
     .copyrow pre { width: 100%; }
     .copy { padding: .55rem .8rem; }
 
-    .hero { padding: 2.25rem 0 2rem; }
+    .hero { padding: 2.25rem var(--gut) 2rem; }
     .hero .cols { gap: 1.75rem; }
     .sheet { padding: 1rem .875rem .875rem; }
     section { padding: 2.5rem 0; }
