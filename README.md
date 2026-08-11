@@ -92,9 +92,9 @@ The agent should answer with two questions, not with code. That is the whole poi
 
 ## Contributing
 
-Foreman is an authored playbook rather than a community standard, so contributions are open where more input makes it more correct and closed where more input would make it less decisive. [CONTRIBUTING.md](CONTRIBUTING.md) says which is which.
+Contributions are open in some areas and closed in others. [CONTRIBUTING.md](CONTRIBUTING.md) says which.
 
-The most useful thing you can send is a failure the playbook did not intercept: your build broke, and Foreman never asked the question that would have prevented it. Post it on the [meta thread](https://github.com/Turki-Sh/Foreman/issues/1). Install paths for agents I cannot test are the most useful pull request.
+The most useful thing you can send is a failure the playbook did not intercept: your build broke, and Foreman never asked the question that would have prevented it. Post it on the [meta thread](https://github.com/Turki-Sh/Foreman/issues/1). The most useful pull request is an install path for an agent I cannot test.
 
 ## Author
 

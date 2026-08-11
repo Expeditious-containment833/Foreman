@@ -55,6 +55,16 @@ Cut every clause of this shape: "only because", "not because", "this is not to s
 
 **The delete test.** Remove the sentence and read the paragraph again. If nothing is lost, it was justification. This is true of roughly every sentence that explains a choice the reader can already see.
 
+### The same reflex in policy writing
+
+It reappears wherever a rule is being stated: a licence, a contributing guide, a pricing page, a refusal. The shape is an opening paragraph that argues for the rule before the rule has been given, answering an objection nobody has raised yet.
+
+> Foreman is an authored playbook, not a community standard. It has a point of view, and that point of view is the product. A version that accommodated every preference would be a worse tool.
+
+None of that is the rule. The rule is "contributions are open here and closed there." State it, then say what is open and what is closed. The argument for a rule is what you use when someone challenges it, not what you lead with.
+
+**Test for a policy:** delete every sentence before the first concrete statement. If the reader still knows what to do, the deleted part was throat-clearing.
+
 Confidence reads as authority. Explanation reads as doubt.
 
 ## Rules you enforce
