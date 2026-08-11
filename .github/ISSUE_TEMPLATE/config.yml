@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: General discussion, or a site you shipped with it
+    url: https://github.com/Turki-Sh/Foreman/issues/1
+    about: The meta thread. Post here rather than opening a new issue.

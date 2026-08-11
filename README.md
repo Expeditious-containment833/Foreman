@@ -92,7 +92,9 @@ The agent should answer with two questions, not with code. That is the whole poi
 
 ## Contributing
 
-Issues welcome, especially failure modes the playbook does not intercept yet. If your build broke in a way Foreman should have caught, that is the most useful thing you can file.
+Foreman is an authored playbook rather than a community standard, so contributions are open where more input makes it more correct and closed where more input would make it less decisive. [CONTRIBUTING.md](CONTRIBUTING.md) says which is which.
+
+The most useful thing you can send is a failure the playbook did not intercept: your build broke, and Foreman never asked the question that would have prevented it. Post it on the [meta thread](https://github.com/Turki-Sh/Foreman/issues/1). Install paths for agents I cannot test are the most useful pull request.
 
 ## Author
 

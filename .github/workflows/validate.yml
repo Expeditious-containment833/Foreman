@@ -78,7 +78,9 @@ jobs:
 
       - name: No em dashes or en dashes in shipped text
         run: |
-          if grep -rn '—\|–' README.md CHANGELOG.md plugins/ ; then
+          # .github is excluded so this step does not match its own pattern.
+          if grep -rn '—\|–' \
+              README.md CHANGELOG.md CONTRIBUTING.md AGENTS.md plugins/ docs/ ; then
             echo "em dash or en dash above"; exit 1
           fi
           echo "punctuation ok"
