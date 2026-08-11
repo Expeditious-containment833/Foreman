@@ -30,6 +30,17 @@
 
 <link rel="preload" href="fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 
+<script>
+  // Set the theme before first paint. White is the default sheet; dark is opt in
+  // and remembered. Inline and synchronous on purpose: a deferred script here
+  // would flash white at a reader who already chose dark.
+  try {
+    if (localStorage.getItem('foreman-theme') === 'dark') {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  } catch (e) {}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -74,6 +85,7 @@
   }
 
   :root {
+    /* Light is the canonical sheet. Dark is the alternate, opt in. */
     --paper: #FFFFFF;
     --ink:   #0A0A0A;
     --muted: #767676;
@@ -81,12 +93,29 @@
     --tint:  #DDE5FA;
     --hair:  #E4E4E4;
 
+    /* The footer panel is always the blueprint, in both themes. */
+    --sheet:     #0A2444;
+    --sheetLine: #7FA8DC;
+    --sheetText: #EAF1FA;
+    --amber:     #FFB400;
+
     --display: "Barlow Condensed", "Arial Narrow", "Avenir Next Condensed", system-ui, sans-serif;
     --body:    system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
     --wrap: 68rem;
     --gut: 1.75rem;
+  }
+
+  /* Deep drafting navy. Not black: the night version of the same sheet. */
+  :root[data-theme="dark"] {
+    --paper: #0A2444;
+    --ink:   #EAF1FA;
+    --muted: #93AECD;
+    --blue:  #7FA8DC;
+    --tint:  #143A66;
+    --hair:  #1B3D6B;
+    --sheet: #061A33;
   }
 
   * { box-sizing: border-box; }
@@ -185,15 +214,35 @@
   .btn.o { background: transparent; color: var(--ink); }
   .btn.o:hover { background: var(--ink); color: var(--paper); }
 
+  /* Star affordance. Deliberately quieter than the two buttons: it is a nudge,
+     not the primary action. The count reveals itself only once it recruits. */
+  .star {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .08em;
+    text-transform: uppercase; text-decoration: none; color: var(--muted);
+    padding: .8rem .5rem; transition: color .16s ease;
+  }
+  .star:hover { color: var(--ink); }
+  .star span[aria-hidden] { color: var(--amber); font-size: .9rem; line-height: 1; }
+  .star .count::before { content: "· "; }
+
   /* ---------- header ---------- */
 
   header { border-bottom: 1px solid var(--hair); }
   .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; }
-  .brand { display: flex; align-items: center; gap: .625rem; font-weight: 700; font-size: 1.0625rem; letter-spacing: -.01em; }
-  .brand img { width: 26px; height: 26px; display: block; image-rendering: pixelated; }
-  .bar nav { display: flex; gap: 1.1rem; }
+  .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.0625rem; letter-spacing: -.01em; }
+  .brand img { width: 30px; height: 30px; display: block; image-rendering: pixelated; }
+  .bar nav { display: flex; gap: 1.1rem; align-items: center; }
   .bar nav a { text-decoration: none; }
   .bar nav a:hover { color: var(--blue); }
+
+  .themetoggle {
+    background: transparent; border: 1px solid var(--hair); color: var(--muted);
+    font-family: var(--mono); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+    padding: .35rem .5rem; cursor: pointer; line-height: 1;
+    transition: color .16s ease, border-color .16s ease;
+  }
+  .themetoggle:hover { color: var(--ink); border-color: var(--ink); }
 
   /* ---------- hero ---------- */
 
@@ -280,24 +329,75 @@
   }
   .copy:hover { color: var(--ink); border-color: var(--ink); }
 
-  /* ---------- footer / title block ---------- */
+  /* ---------- footer: the blueprint sheet ----------
+     The one place on the page that is a drawing rather than a document. Blue in
+     both themes, because it is the artefact the whole site is arguing for. */
 
-  footer { border-top: 1px solid var(--hair); padding: 2.25rem 0 3rem; }
-  .foot { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: flex-end; }
-  .foot p { font-size: .875rem; color: var(--muted); max-width: 52ch; margin: 0; }
-  .foot a { color: var(--ink); }
-  .links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .875rem; }
-  .links a { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--hair); padding-bottom: 2px; }
-  .links a:hover { border-color: var(--blue); color: var(--blue); }
+  footer { padding: 2.5rem 0 2rem; }
 
-  .titleblock {
-    border: 1px solid var(--ink);
-    display: grid; grid-template-columns: auto auto;
-    font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em;
+  .sheetfoot {
+    position: relative; overflow: hidden;
+    background: var(--sheet); color: var(--sheetText);
+    border-radius: 14px;
+    padding: 2.5rem 2rem 0;
+    isolation: isolate;
   }
-  .titleblock div { padding: .45rem .7rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
-  .titleblock div:nth-child(2n) { border-right: 0; }
-  .titleblock div:nth-last-child(-n+2) { border-bottom: 0; }
+  .sheetfoot::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(127,168,220,.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127,168,220,.16) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+  .sheetfoot > * { position: relative; z-index: 1; }
+
+  .foothead { display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; justify-content: space-between; align-items: flex-start; }
+  .foothead p { font-size: .9375rem; color: rgba(234,241,250,.72); max-width: 44ch; margin: 0; }
+  .foothead a { color: var(--sheetText); text-decoration: none; border-bottom: 1px solid rgba(127,168,220,.6); }
+  .foothead a:hover { border-color: var(--amber); color: var(--amber); }
+
+  .stamp {
+    display: inline-block; border: 1px solid rgba(127,168,220,.7);
+    padding: .3rem .55rem; font-family: var(--mono); font-size: .6875rem;
+    letter-spacing: .12em; text-transform: uppercase; color: rgba(234,241,250,.85);
+    margin-bottom: .875rem;
+  }
+
+  .links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+  .links a {
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none;
+    border: 1px solid rgba(127,168,220,.45); padding: .45rem .65rem;
+    color: var(--sheetText); border-bottom-width: 1px;
+    transition: border-color .16s ease, color .16s ease;
+  }
+  .links a:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* The wordmark row: oversized type, cut off by the sheet edge, with the
+     cutout standing on the baseline. Straight from the reference. */
+  .wordrow {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 1rem; margin-top: 2.5rem;
+  }
+  .wordmark {
+    font-family: var(--display); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(3.5rem, 15.5vw, 11rem); line-height: .78;
+    letter-spacing: -.01em; color: var(--sheetText);
+    margin: 0 0 -.09em; user-select: none;
+  }
+  .cutout {
+    width: clamp(7rem, 20vw, 13rem); height: auto; display: block;
+    image-rendering: pixelated; margin-bottom: -2px; flex: none;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,.35));
+  }
+
+  .footrule {
+    display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; justify-content: space-between;
+    border-top: 1px solid rgba(127,168,220,.35);
+    margin-top: 1rem; padding: .75rem 0 1.25rem;
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em;
+    text-transform: uppercase; color: rgba(234,241,250,.6);
+  }
 
   /* ---------- responsive ---------- */
 
@@ -337,7 +437,7 @@
 <header>
   <div class="wrap bar">
     <div class="brand">
-      <img src="icon-32.png" width="26" height="26" alt="" aria-hidden="true">
+      <img src="icon-180.png" width="30" height="30" alt="" aria-hidden="true">
       Foreman
     </div>
     <nav class="lbl">
@@ -345,6 +445,7 @@
       <a href="#phases">[ phases ]</a>
       <a href="#install">[ install ]</a>
       <a href="https://github.com/Turki-Sh/Foreman">[ github ]</a>
+      <button class="themetoggle" type="button" id="theme" aria-pressed="false">Dark</button>
     </nav>
   </div>
 </header>
@@ -363,6 +464,10 @@
         <div class="cta">
           <a class="btn" href="#install">Install it</a>
           <a class="btn o" href="https://github.com/Turki-Sh/Foreman">Read every line</a>
+          <a class="star" href="https://github.com/Turki-Sh/Foreman/stargazers"
+             id="star" data-repo="Turki-Sh/Foreman" data-threshold="100">
+            <span aria-hidden="true">&#9733;</span> Star on GitHub<span class="count" hidden></span>
+          </a>
         </div>
       </div>
 
@@ -588,25 +693,42 @@ cp -r Foreman/plugins/foreman/skills/foreman ~/.agents/skills/</pre>
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div>
-      <p>
-        Built by <a href="https://turkialshuaibi.com/">Turki Alshuaibi</a>, AI engineer, from a session
-        delivered to the KAUST Academy AI cohort on building and shipping with agents. Everything in it
-        came from shipping, and from watching capable engineers get stuck in the same nine places.
-      </p>
-      <div class="links">
-        <a href="https://github.com/Turki-Sh/Foreman">Repository</a>
-        <a href="https://turkialshuaibi.com/">turkialshuaibi.com</a>
-        <a href="https://linkedin.com/in/turki-alshuaibi">LinkedIn</a>
-        <a href="https://github.com/Turki-Sh">GitHub</a>
-      </div>
-    </div>
+  <div class="wrap">
+    <div class="sheetfoot">
+      <div class="foothead">
+        <div>
+          <span class="stamp">Blueprint no. 1 · v1.3.0 · MIT</span>
+          <p>
+            Built by <a href="https://turkialshuaibi.com/">Turki Alshuaibi</a>, AI engineer.
+            Everything in it came from shipping, and from watching capable engineers get stuck
+            in the same nine places.
+          </p>
+          <div class="links">
+            <a href="https://github.com/Turki-Sh/Foreman">Repository</a>
+            <a href="https://turkialshuaibi.com/">turkialshuaibi.com</a>
+            <a href="https://linkedin.com/in/turki-alshuaibi">LinkedIn</a>
+            <a href="https://github.com/Turki-Sh">GitHub</a>
+          </div>
+        </div>
 
-    <div class="titleblock">
-      <div><b>FOREMAN</b></div><div>OVERVIEW</div>
-      <div>BLUEPRINT NO. 1</div><div>V1.3.0</div>
-      <div>T. ALSHUAIBI</div><div>MIT</div>
+        <div>
+          <span class="stamp">Then say</span>
+          <p style="font-family:var(--mono); font-size:.8125rem; color:var(--sheetText);">
+            help me build my portfolio
+          </p>
+        </div>
+      </div>
+
+      <div class="wordrow">
+        <p class="wordmark">Foreman</p>
+        <img class="cutout" src="foreman-cutout.png" width="768" height="762"
+             alt="Turki Alshuaibi, drawn as pixel art in a hard hat and high-visibility vest.">
+      </div>
+
+      <div class="footrule">
+        <span>T. Alshuaibi · MIT</span>
+        <span>Every good build starts as a drawing</span>
+      </div>
     </div>
   </div>
 </footer>
@@ -618,6 +740,45 @@ cp -r Foreman/plugins/foreman/skills/foreman ~/.agents/skills/</pre>
   for (const p of document.querySelectorAll('.drawing .ink-path')) {
     p.style.setProperty('--len', Math.ceil(p.getTotalLength()));
   }
+
+  // Theme toggle. The initial value is already set in <head> so dark readers
+  // never see a white flash; this only wires the button.
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById('theme');
+    const label = t => {
+      btn.textContent = t === 'dark' ? 'Light' : 'Dark';
+      btn.setAttribute('aria-pressed', String(t === 'dark'));
+      const m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.content = t === 'dark' ? '#0A2444' : '#FFFFFF';
+    };
+    label(root.dataset.theme || 'light');
+    btn.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      label(next);
+      try { localStorage.setItem('foreman-theme', next); } catch (e) {}
+    });
+  })();
+
+  // Star count. The link always works. The number only appears once it is worth
+  // showing, so a low count never argues against the project. Set the bar with
+  // data-threshold on the link. Fails silently and costs the page nothing.
+  (function () {
+    const el = document.getElementById('star');
+    if (!el || !navigator.onLine) return;
+    const threshold = Number(el.dataset.threshold || 100);
+    fetch('https://api.github.com/repos/' + el.dataset.repo, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then(d => {
+        const n = d.stargazers_count;
+        if (typeof n !== 'number' || n < threshold) return;
+        const out = el.querySelector('.count');
+        out.textContent = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n);
+        out.hidden = false;
+      })
+      .catch(() => {});
+  })();
 
   for (const b of document.querySelectorAll('.copy')) {
     b.addEventListener('click', () => {

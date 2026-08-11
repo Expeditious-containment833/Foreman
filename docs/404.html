@@ -16,6 +16,10 @@
     src: url("/Foreman/fonts/barlow-condensed-700.woff2") format("woff2");
     font-weight: 700; font-style: normal; font-display: swap;
   }
+  :root[data-theme="dark"] {
+    --paper: #0A2444; --ink: #EAF1FA; --muted: #93AECD;
+    --blue: #7FA8DC; --tint: #143A66; --hair: #1B3D6B;
+  }
   :root {
     --paper: #FFFFFF; --ink: #0A0A0A; --muted: #767676;
     --blue: #1B4DD1; --tint: #DDE5FA; --hair: #E4E4E4;
@@ -63,6 +67,15 @@
 </style>
 </head>
 <body>
+<script>
+  // Carry the reader's chosen theme across pages, before first paint.
+  try {
+    if (localStorage.getItem('foreman-theme') === 'dark') {
+      document.documentElement.dataset.theme = 'dark';
+      document.querySelector('meta[name="theme-color"]').content = '#0A2444';
+    }
+  } catch (e) {}
+</script>
 <main>
   <span class="boxlbl">Error 404</span>
   <h1>That sheet isn't in the set.</h1>
