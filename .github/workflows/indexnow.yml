@@ -1,0 +1,51 @@
+name: indexnow
+
+# Tell Bing (and the other IndexNow participants) the moment the site changes,
+# instead of waiting for a crawl. The key file is served from docs/, so the
+# endpoint can verify ownership on its own.
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit the site to IndexNow
+        env:
+          HOST: foreman.turkialshuaibi.com
+          KEY: 40ccdb6d60b948f3a0ebe5c92949b42f
+        run: |
+          # Pages needs a moment to finish deploying before the crawler arrives.
+          sleep 60
+
+          body=$(cat <<JSON
+          {
+            "host": "$HOST",
+            "key": "$KEY",
+            "keyLocation": "https://$HOST/$KEY.txt",
+            "urlList": ["https://$HOST/"]
+          }
+          JSON
+          )
+
+          code=$(curl -sS -o /tmp/indexnow.out -w '%{http_code}' \
+            -X POST 'https://api.indexnow.org/IndexNow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data "$body" || echo 000)
+
+          echo "IndexNow responded $code"
+          cat /tmp/indexnow.out 2>/dev/null || true
+
+          # 200 accepted, 202 accepted pending key validation. Anything else is
+          # worth seeing in the log but must not fail the build: indexing is not
+          # a gate on shipping.
+          case "$code" in
+            200|202) echo "submitted" ;;
+            *) echo "::warning::IndexNow returned $code, submission not confirmed" ;;
+          esac
