@@ -1,13 +1,28 @@
 # Foreman
 
 **A build playbook for shipping real websites with coding agents.**
+Runs on any agent that reads a skill file. Markdown and templates only, nothing executes.
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-D97757?style=flat&logo=claude&logoColor=white)](https://code.claude.com/docs/en/plugins)
+[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-portable-5B8DEF?style=flat&logo=openai&logoColor=white)](AGENTS.md)
+[![Phases](https://img.shields.io/badge/phases-7-8B5CF6?style=flat)](#what-is-in-the-box)
+[![References](https://img.shields.io/badge/references-9-8B5CF6?style=flat)](#what-is-in-the-box)
+[![Assets](https://img.shields.io/badge/assets-6-8B5CF6?style=flat)](#what-is-in-the-box)
 [![Version](https://img.shields.io/badge/version-1.2.0-4C8EDA?style=flat&logo=semanticrelease&logoColor=white)](CHANGELOG.md)
 [![Validate](https://img.shields.io/github/actions/workflow/status/Turki-Sh/Foreman/validate.yml?style=flat&logo=githubactions&logoColor=white&label=validate)](https://github.com/Turki-Sh/Foreman/actions/workflows/validate.yml)
 [![Scripts](https://img.shields.io/badge/executable%20code-none-16A34A?style=flat&logo=markdown&logoColor=white)](#no-scripts)
 [![License](https://img.shields.io/badge/license-MIT-3DA639?style=flat&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Author](https://img.shields.io/badge/by-Turki%20Alshuaibi-FFB400?style=flat)](https://turkialshuaibi.com/)
+
+**[turki-sh.github.io/Foreman](https://turki-sh.github.io/Foreman/)**
+
+<p align="center">
+  <a href="https://turki-sh.github.io/Foreman/">
+    <img src="docs/screenshot.png" alt="Foreman: with the skill installed, the agent answers 'help me build my portfolio' with two questions instead of code." width="820">
+  </a>
+</p>
+
+<p align="center"><i>The first message, with Foreman installed. No code yet. That is the whole point.</i></p>
 
 Coding agents removed the cost of writing a site. They did not remove the cost of deciding what it should be. So the internet now has thousands of sites that were built in an afternoon and look like each other: the same cream background, the same serif hero, the same three cards, the same accent, no domain, no metadata, no 404.
 
@@ -17,24 +32,27 @@ You do not read Foreman. Your agent does.
 
 ## Install
 
-**Claude Code**
+Foreman is one folder of markdown. There is nothing to compile and nothing to run, so it installs anywhere an agent can read files.
 
-Type both lines inside Claude Code, in this order.
+**Claude Code.** Type both lines, in this order. The marketplace is named `alshuaibi`, so the install id is `foreman@alshuaibi`.
 
 ```
 /plugin marketplace add Turki-Sh/Foreman
 /plugin install foreman@alshuaibi
 ```
 
-The marketplace is named `alshuaibi`, so the install id is `foreman@alshuaibi`.
+**Claude apps.** Download [`foreman.skill`](https://github.com/Turki-Sh/Foreman/raw/main/dist/foreman.skill) and upload it as a skill.
 
-**Claude apps**
+**Cursor, Windsurf, Codex, Copilot, Gemini CLI, Cline, or any other coding agent.** Clone the repo and copy the skill folder where your agent looks for skills or rules.
 
-Download [`foreman.skill`](https://github.com/Turki-Sh/Foreman/raw/main/dist/foreman.skill) and upload it as a skill.
+```
+git clone https://github.com/Turki-Sh/Foreman.git
+cp -r Foreman/plugins/foreman/skills/foreman ~/.agents/skills/
+```
 
-**Anything else that reads SKILL.md**
+Common destinations: `~/.agents/skills/`, `~/.cursor/rules/`, `~/.codex/skills/`, or a `.github/` folder in the project. See [AGENTS.md](AGENTS.md) for per-tool paths and for what to do if your agent has no skills directory at all.
 
-Copy `plugins/foreman/skills/foreman/` into your agent's skills directory.
+**Any assistant with no skills support, including the web chat you already have open.** Paste [`SKILL.md`](plugins/foreman/skills/foreman/SKILL.md) into the conversation and say "run this on me." The phases work without the references; the references only deepen them.
 
 ## Then say
 
