@@ -313,14 +313,21 @@
   .card p { font-size: .875rem; color: var(--muted); margin: 0; }
 
   /* install */
+  /* Grid items default to min-width:auto too, so each block here would refuse to
+     shrink below the longest command inside it. Same trap as the flex row below. */
   .install { display: grid; gap: 1.5rem; }
+  .install > div { min-width: 0; }
+  .hero .cols > * { min-width: 0; }
   pre {
     margin: 0; background: var(--paper); border: 1px solid var(--hair);
     padding: .8rem .9rem; overflow-x: auto;
     font-family: var(--mono); font-size: .8125rem; line-height: 1.75;
   }
   .copyrow { display: flex; gap: .5rem; align-items: stretch; }
-  .copyrow pre { flex: 1; }
+  /* min-width:0 is load bearing. A flex item defaults to min-width:auto, which
+     refuses to shrink below its longest unbreakable token, so the pre pushed the
+     whole page 230px wide on a phone and its own overflow-x never engaged. */
+  .copyrow pre { flex: 1; min-width: 0; }
   .copy {
     font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
     background: transparent; color: var(--muted); border: 1px solid var(--hair);
@@ -408,10 +415,44 @@
     .card:last-child { border-bottom: 0; }
   }
   @media (max-width: 34rem) {
+    :root { --gut: 1.25rem; }
+
     .bar nav { display: none; }
-    .row .t { text-align: left; grid-column: 2 / -1; }
+
     .row { grid-template-columns: 2rem 1fr; }
+    .row .t { text-align: left; grid-column: 2 / -1; }
     .row .hatch { display: none; }
+
+    /* Give the command its full width and put Copy underneath it. Side by side,
+       the button ate a third of the line on a 375px screen. */
+    .copyrow { flex-direction: column; align-items: flex-start; }
+    .copyrow pre { width: 100%; }
+    .copy { padding: .55rem .8rem; }
+
+    .hero { padding: 2.25rem 0 2rem; }
+    .hero .cols { gap: 1.75rem; }
+    .sheet { padding: 1rem .875rem .875rem; }
+    section { padding: 2.5rem 0; }
+
+    /* The wordmark carries the footer, so let it run to the edges and sit the
+       cutout beside it rather than shrinking both to fit one line. */
+    footer { padding: 1.75rem 0 1.5rem; }
+    .sheetfoot { padding: 1.75rem 1.25rem 0; border-radius: 10px; }
+    .wordrow { margin-top: 1.75rem; align-items: flex-end; gap: .5rem; }
+    .wordmark { font-size: 3.75rem; }
+    .cutout { width: 6rem; }
+    .foothead { gap: 1.25rem; }
+    /* Stacked, this lands directly under the install section's identical line.
+       Two columns apart on desktop, a stutter on a phone. */
+    .thensay { display: none; }
+    .links { gap: .4rem; }
+    .links a { padding: .4rem .55rem; }
+    .footrule { gap: .35rem; }
+  }
+
+  @media (max-width: 24rem) {
+    .wordmark { font-size: 3.1rem; }
+    .cutout { width: 5rem; }
   }
 
   /* ---------- the one animation ----------
@@ -710,7 +751,7 @@ cp -r Foreman/plugins/foreman/skills/foreman ~/.agents/skills/</pre>
           </div>
         </div>
 
-        <div>
+        <div class="thensay">
           <span class="stamp">Then say</span>
           <p style="font-family:var(--mono); font-size:.8125rem; color:var(--sheetText);">
             help me build my portfolio
