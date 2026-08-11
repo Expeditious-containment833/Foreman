@@ -1,10 +1,10 @@
 # Foreman
 
 **A build playbook for shipping real websites with coding agents.**
-Runs on any agent that reads a skill file. Markdown and templates only, nothing executes.
+Not tied to any one agent: it is a folder of markdown, so it runs on Claude Code, Cursor, Windsurf, Codex, Copilot, Gemini CLI, or a chat window with no skills support at all.
 
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-D97757?style=flat&logo=claude&logoColor=white)](https://code.claude.com/docs/en/plugins)
-[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-portable-1B4DD1?style=flat&logo=openai&logoColor=white)](AGENTS.md)
+[![Agent Skill](https://img.shields.io/badge/agent-any-1B4DD1?style=flat&logo=markdown&logoColor=white)](AGENTS.md)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-one%20command-D97757?style=flat&logo=claude&logoColor=white)](https://code.claude.com/docs/en/plugins)
 [![Phases](https://img.shields.io/badge/phases-7-1B4DD1?style=flat)](#what-is-in-the-box)
 [![References](https://img.shields.io/badge/references-9-1B4DD1?style=flat)](#what-is-in-the-box)
 [![Assets](https://img.shields.io/badge/assets-6-1B4DD1?style=flat)](#what-is-in-the-box)
@@ -32,7 +32,7 @@ You do not read Foreman. Your agent does.
 
 ## Install
 
-Foreman is one folder of markdown. There is nothing to compile and nothing to run, so it installs anywhere an agent can read files.
+Foreman is one folder of markdown. There is nothing to compile and nothing to run, so it installs anywhere an agent can read files. Claude Code is listed first only because it is the one that takes a single command, not because the playbook is built for it.
 
 **Claude Code.** Type both lines, in this order. The marketplace is named `alshuaibi`, so the install id is `foreman@alshuaibi`.
 
@@ -105,4 +105,6 @@ Built by **Turki Alshuaibi**, AI engineer. Everything in it came from shipping, 
 
 ## License
 
-MIT. Use it, fork it, teach with it. Attribution appreciated, not required.
+MIT. Use it, fork it, teach with it, ship client work with it.
+
+MIT does require attribution: the copyright notice travels with any copy or substantial portion. Beyond that legal minimum, if Foreman shaped a site you are proud of, a line in your README or a link in the post is the thing that actually helps. Credit costs you nothing and it is how a playbook finds the next person who needs it.

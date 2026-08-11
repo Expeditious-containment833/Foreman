@@ -64,6 +64,37 @@
   .rule { margin-top: 2.25rem; padding-top: .875rem; border-top: 1px solid var(--hair);
           font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em;
           text-transform: uppercase; color: var(--muted); }
+
+  /* Drafting paper, same as the OG card. Barely visible, does the work. */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(var(--gridB) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gridB) 1px, transparent 1px),
+      linear-gradient(var(--gridA) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gridA) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  }
+  :root { --gridA: rgba(27,77,209,.055); --gridB: rgba(27,77,209,.13); }
+  :root[data-theme="dark"] { --gridA: rgba(127,168,220,.07); --gridB: rgba(127,168,220,.15); }
+
+  /* The sheet, torn. It runs off the right edge and stops mid-drawing, which is
+     the whole idea: you asked for a page that is not in the set. */
+  .torn {
+    position: fixed; z-index: 0; pointer-events: none;
+    right: 0; top: 50%; transform: translateY(-50%);
+    width: min(46vw, 30rem); opacity: .9;
+  }
+  .torn svg { display: block; width: 100%; height: auto; }
+  .torn .ln { stroke: var(--blue); fill: none; stroke-linecap: round; opacity: .75; }
+  .torn .frame { stroke: var(--ink); opacity: .55; }
+  .torn .edge { stroke: var(--ink); opacity: .4; stroke-dasharray: 2 5; }
+  main { position: relative; z-index: 1; }
+
+  @media (max-width: 52rem) { .torn { display: none; } }
+  /* Reserve the sheet's column so the text centres in what is left of the page
+     rather than running underneath the drawing. */
+  @media (min-width: 52.01rem) { body { padding-right: min(48vw, 33rem); } }
 </style>
 </head>
 <body>
@@ -76,6 +107,38 @@
     }
   } catch (e) {}
 </script>
+<div class="torn" aria-hidden="true">
+  <svg viewBox="0 0 400 340" fill="none">
+    <defs>
+      <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="9" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <!-- everything past the tear is clipped away -->
+      <clipPath id="tear">
+        <path d="M0 0 H286 L272 32 L292 66 L268 104 L290 146 L266 188 L288 232 L270 274 L286 306 L272 340 H0 Z"/>
+      </clipPath>
+    </defs>
+
+    <g clip-path="url(#tear)">
+      <g filter="url(#rough)">
+        <path class="ln frame" stroke-width="2" d="M34 22 L360 18 L364 322 L32 326 Z"/>
+        <path class="ln" stroke-width="1.5" d="M34 60 C 130 62, 260 58, 360 57"/>
+        <path class="ln" stroke-width="1.7" d="M60 96 L214 94"/>
+        <path class="ln" stroke-width="1.7" d="M60 118 L268 116"/>
+        <path class="ln" stroke-width="1.7" d="M60 140 L172 139"/>
+        <path class="ln" stroke-width="1.7" d="M60 176 L146 176 L146 206 L60 206 Z"/>
+        <path class="ln" stroke-width="1.5" d="M60 244 L300 241"/>
+        <path class="ln" stroke-width="1.5" d="M60 266 L236 264"/>
+      </g>
+    </g>
+
+    <!-- the torn edge itself -->
+    <path class="ln edge" stroke-width="1.4"
+          d="M286 0 L272 32 L292 66 L268 104 L290 146 L266 188 L288 232 L270 274 L286 306 L272 340"/>
+  </svg>
+</div>
+
 <main>
   <span class="boxlbl">Error 404</span>
   <h1>That sheet isn't in the set.</h1>
