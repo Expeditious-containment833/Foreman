@@ -4,25 +4,25 @@
 Runs on any agent that reads a skill file. Markdown and templates only, nothing executes.
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-D97757?style=flat&logo=claude&logoColor=white)](https://code.claude.com/docs/en/plugins)
-[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-portable-5B8DEF?style=flat&logo=openai&logoColor=white)](AGENTS.md)
-[![Phases](https://img.shields.io/badge/phases-7-8B5CF6?style=flat)](#what-is-in-the-box)
-[![References](https://img.shields.io/badge/references-9-8B5CF6?style=flat)](#what-is-in-the-box)
-[![Assets](https://img.shields.io/badge/assets-6-8B5CF6?style=flat)](#what-is-in-the-box)
-[![Version](https://img.shields.io/badge/version-1.2.0-4C8EDA?style=flat&logo=semanticrelease&logoColor=white)](CHANGELOG.md)
+[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-portable-1B4DD1?style=flat&logo=openai&logoColor=white)](AGENTS.md)
+[![Phases](https://img.shields.io/badge/phases-7-1B4DD1?style=flat)](#what-is-in-the-box)
+[![References](https://img.shields.io/badge/references-9-1B4DD1?style=flat)](#what-is-in-the-box)
+[![Assets](https://img.shields.io/badge/assets-6-1B4DD1?style=flat)](#what-is-in-the-box)
+[![Version](https://img.shields.io/badge/version-1.3.0-1B4DD1?style=flat&logo=semanticrelease&logoColor=white)](CHANGELOG.md)
 [![Validate](https://img.shields.io/github/actions/workflow/status/Turki-Sh/Foreman/validate.yml?style=flat&logo=githubactions&logoColor=white&label=validate)](https://github.com/Turki-Sh/Foreman/actions/workflows/validate.yml)
 [![Scripts](https://img.shields.io/badge/executable%20code-none-16A34A?style=flat&logo=markdown&logoColor=white)](#no-scripts)
 [![License](https://img.shields.io/badge/license-MIT-3DA639?style=flat&logo=opensourceinitiative&logoColor=white)](LICENSE)
-[![Author](https://img.shields.io/badge/by-Turki%20Alshuaibi-FFB400?style=flat)](https://turkialshuaibi.com/)
+[![Author](https://img.shields.io/badge/by-Turki%20Alshuaibi-1B4DD1?style=flat)](https://turkialshuaibi.com/)
 
 **[turki-sh.github.io/Foreman](https://turki-sh.github.io/Foreman/)**
 
 <p align="center">
   <a href="https://turki-sh.github.io/Foreman/">
-    <img src="docs/screenshot.png" alt="Foreman: with the skill installed, the agent answers 'help me build my portfolio' with two questions instead of code." width="820">
+    <img src="docs/screenshot.png" alt="The Foreman site: a technical sheet on white paper, with a hand-drawn wireframe annotated with the decisions the interview forces." width="820">
   </a>
 </p>
 
-<p align="center"><i>The first message, with Foreman installed. No code yet. That is the whole point.</i></p>
+<p align="center"><i>Foreman's own site, built by running Foreman. If the playbook cannot produce one good page, it is not worth installing.</i></p>
 
 Coding agents removed the cost of writing a site. They did not remove the cost of deciding what it should be. So the internet now has thousands of sites that were built in an afternoon and look like each other: the same cream background, the same serif hero, the same three cards, the same accent, no domain, no metadata, no 404.
 

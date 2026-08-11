@@ -2,6 +2,18 @@
 
 All notable changes to Foreman. Versioning: the major number changes when the session flow changes, the minor when references or assets are added, the patch for corrections.
 
+## 1.3.0, 11 August 2026
+
+Added:
+- `references/design-direction.md` now refuses the single accented word. Colouring one word of a headline in the brand colour is one of the strongest tells that a machine set the type, along with the one-word gradient, swoosh, and highlighter block. The section gives the structural alternatives that are actual decisions.
+- Gates for phases 4, 5, 6, and 7. The playbook claimed seven gated phases and only had four.
+- A hard number for the hero media cap, 1.5 MB, in `performance-and-access.md` and in the brief template, which previously read `[X] MB`. This is the constraint whose absence produces the failure in `worked-example.md`.
+
+Changed:
+- The failure-modes list names the agent's own version of the first failure: presenting a finished visual system instead of variants the owner chose from.
+- `assets/brand-harness.html` now fills all three variants. It previously shipped one filled variant and two empty stubs, so the side-by-side comparison the file exists for could not happen without extra work.
+- The Close section can now truthfully say the repository is linked in the skill, because it is.
+
 ## 1.2.0, 10 August 2026
 
 Added:

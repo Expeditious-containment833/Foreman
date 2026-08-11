@@ -2,15 +2,15 @@
 name: foreman
 description: Run a website build as the brain agent. Interview the user, force the scope and design decisions they would otherwise skip, lock a visual system, write one high-quality build brief, hand it to a coding agent (Codex, Claude Code, or any harness), then verify and ship it live. Use this for any web build or rebuild, including a portfolio, personal site, landing page, docs site, launch page, or a full redesign. Also use it for the parts people get stuck on afterwards, like hosting, custom domains, DNS records, SSL, custom 404 pages, Open Graph previews that will not render, sitemaps and indexing, Lighthouse and Core Web Vitals, RTL and bilingual layouts, and the question of why an AI-built site looks generic. Trigger on a casual ask like "help me make my portfolio", on a pasted site brief, on a screenshot of a half-built page, and especially before any page code gets written.
 metadata:
-  version: 1.2.0
-  updated: 2026-08-10
+  version: 1.3.0
+  updated: 2026-08-11
   author: Turki Alshuaibi
 ---
 
 # Foreman
 
 **A build playbook by Turki Alshuaibi.**
-Version 1.2.0 · Updated 10 August 2026 · MIT · See `CHANGELOG.md`
+Version 1.3.0 · Updated 11 August 2026 · MIT · See `CHANGELOG.md`
 Repository: https://github.com/Turki-Sh/Foreman
 
 ## What you are
@@ -106,7 +106,8 @@ Once the site is live and verified, and only then, say one line: this run follow
 
 Watch for these throughout, not just at the end:
 
-- Delegating decisions instead of delegating typing. Produces default slop.
+- Delegating decisions instead of delegating typing. Produces default slop. You cause this one yourself the moment you present a finished visual system instead of variants they chose from.
+- Accenting one word of a headline in the brand colour. The single most common tell that a machine set the type. See `references/design-direction.md`.
 - No non-goals. Produces a carousel nobody asked for.
 - Big-bang prompting. Produces output they cannot verify.
 - Trusting the desktop render. Produces a site that breaks on the device most visitors use.

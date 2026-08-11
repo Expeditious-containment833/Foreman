@@ -5,59 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found · Foreman</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230E1116'/%3E%3Cpath d='M9 23V9h14v3.4h-10.4v2.9H21v3.4h-8.4V23z' fill='%23FFB400'/%3E%3C/svg%3E">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="/Foreman/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/Foreman/icon-180.png">
+<link rel="preload" href="/Foreman/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root {
-    --bg: #F4F5F7; --surface: #FFFFFF; --text: #12171D; --muted: #5C6672;
-    --line: #DCE0E5; --accent: #C77E00;
-    --display: system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  @font-face {
+    font-family: "Barlow Condensed";
+    src: url("/Foreman/fonts/barlow-condensed-700.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: swap;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0E1116; --surface: #161B22; --text: #E6EDF3; --muted: #8B949E;
-      --line: #232A33; --accent: #FFB400;
-    }
+  :root {
+    --paper: #FFFFFF; --ink: #0A0A0A; --muted: #767676;
+    --blue: #1B4DD1; --tint: #DDE5FA; --hair: #E4E4E4;
+    --display: "Barlow Condensed", "Arial Narrow", "Avenir Next Condensed", system-ui, sans-serif;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   }
   * { box-sizing: border-box; }
+  html { scrollbar-color: var(--ink) var(--paper); scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 13px; }
+  ::-webkit-scrollbar-track { background: var(--paper); border-left: 1px solid var(--hair); }
+  ::-webkit-scrollbar-thumb { background: var(--ink); border: 4px solid var(--paper); }
+  ::selection { background: var(--tint); color: var(--ink); }
   body {
-    margin: 0; min-height: 100dvh; background: var(--bg); color: var(--text);
-    font-family: var(--display); line-height: 1.6;
-    display: grid; place-items: center; padding: 1.5rem;
+    margin: 0; min-height: 100dvh; background: var(--paper); color: var(--ink);
+    font-family: var(--body); line-height: 1.6;
+    display: grid; place-items: center; padding: 1.75rem;
     -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 44ch; }
-  .eyebrow {
-    font-family: var(--mono); font-size: .6875rem; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--muted); margin: 0 0 1rem;
+  main { max-width: 46ch; width: 100%; }
+  .boxlbl {
+    display: inline-block; border: 1px solid var(--ink); padding: .3rem .55rem;
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase;
   }
   h1 {
-    font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.08;
-    letter-spacing: -0.03em; font-weight: 660; margin: 0 0 .75rem;
+    font-family: var(--display); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(2.4rem, 8vw, 4rem); line-height: .9; letter-spacing: -.005em;
+    margin: 1rem 0 .75rem;
   }
-  p.body { color: var(--muted); margin: 0 0 1.75rem; }
-  .actions { display: flex; flex-wrap: wrap; gap: .625rem; }
-  a {
-    display: inline-block; padding: .7rem 1.15rem; border-radius: 5px;
-    text-decoration: none; font-size: .9375rem; font-weight: 600;
-    background: var(--text); color: var(--bg); border: 1px solid var(--text);
+  p { color: var(--muted); margin: 0 0 1.75rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+  a.btn {
+    display: inline-block; font-family: var(--mono); font-size: .75rem;
+    letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+    padding: .8rem 1.2rem; background: var(--ink); color: var(--paper);
+    border: 1px solid var(--ink); transition: background .16s ease, color .16s ease;
   }
-  a.ghost { background: transparent; color: var(--text); border-color: var(--line); }
-  a:hover { opacity: .88; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a.btn:hover { background: var(--blue); border-color: var(--blue); }
+  a.btn.o { background: transparent; color: var(--ink); }
+  a.btn.o:hover { background: var(--ink); color: var(--paper); }
+  a.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  .rule { margin-top: 2.25rem; padding-top: .875rem; border-top: 1px solid var(--hair);
+          font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em;
+          text-transform: uppercase; color: var(--muted); }
 </style>
 </head>
 <body>
 <main>
-  <p class="eyebrow">404</p>
-  <h1>That page isn't here.</h1>
-  <p class="body">The link may be old, or the address may have a typo in it. Everything else is still where it was.</p>
+  <span class="boxlbl">Error 404</span>
+  <h1>That sheet isn't in the set.</h1>
+  <p>The link may be old, or the address may have a typo in it. Everything else is still where it was.</p>
   <div class="actions">
-    <a href="/Foreman/">Back to Foreman</a>
-    <a class="ghost" href="https://github.com/Turki-Sh/Foreman">The repository</a>
+    <a class="btn" href="/Foreman/">Back to Foreman</a>
+    <a class="btn o" href="https://github.com/Turki-Sh/Foreman">The repository</a>
   </div>
+  <p class="rule">Foreman · Blueprint no. 1 · T. Alshuaibi · MIT</p>
 </main>
 </body>
 </html>

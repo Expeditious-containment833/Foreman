@@ -25,6 +25,14 @@ Any of these is legitimate **if the owner chose it**. If you produced one withou
 
 Same test for structure. Numbered markers (01 / 02 / 03), eyebrow labels, and section dividers should encode something true about the content. If the content is not actually a sequence, numbering it is decoration pretending to be information.
 
+## The one accented word
+
+Setting a single word of a headline in the accent colour is one of the strongest tells that a machine wrote the page. "Your agent's ceiling is your **brief**." "We build **beautiful** software." It appears in generated output constantly because it looks like emphasis without requiring a reason for the emphasis.
+
+Refuse it by default. A headline earns its weight from the sentence, not from one coloured word. If a word genuinely deserves isolation, isolate it with something structural: give it its own line, change its size, set it in the display face while the rest is body, or let it sit alone in white space. Those are decisions. Recolouring one word is a reflex.
+
+Same reflex, other forms: the gradient across one word, the underline swoosh under one word, the highlighter block behind one word. If you cannot say why that specific word and no other, it is decoration.
+
 ## Spend boldness in one place
 
 Help them name one signature element the page is remembered by: a hero treatment, a type move, a single orchestrated animation, an interactive artifact from their own domain. Then keep everything around it quiet and disciplined.

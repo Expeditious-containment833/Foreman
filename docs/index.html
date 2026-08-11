@@ -8,14 +8,15 @@
 <meta name="description" content="Foreman turns your coding agent into the foreman of a website build. It interviews you, forces the design and scope decisions, locks a visual system, writes the brief, then verifies, ships, and indexes the site.">
 <link rel="canonical" href="https://turki-sh.github.io/Foreman/">
 
-<meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230E1116'/%3E%3Cpath d='M9 23V9h14v3.4h-10.4v2.9H21v3.4h-8.4V23z' fill='%23FFB400'/%3E%3C/svg%3E">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Foreman">
 <meta property="og:title" content="Foreman · A build playbook for shipping websites with agents">
-<meta property="og:description" content="Your agent's ceiling is your brief. Foreman interviews you, forces the decisions, locks a visual system, then verifies, ships, and indexes the site.">
+<meta property="og:description" content="Every good build starts as a drawing. Foreman makes your agent do the drawing first: the interview, the decisions, the locked system, the brief.">
 <meta property="og:url" content="https://turki-sh.github.io/Foreman/">
 <meta property="og:image" content="https://turki-sh.github.io/Foreman/og.png">
 <meta property="og:image:width" content="1200">
@@ -24,8 +25,10 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Foreman · A build playbook for shipping websites with agents">
-<meta name="twitter:description" content="Your agent's ceiling is your brief. Foreman interviews you, forces the decisions, locks a visual system, then verifies, ships, and indexes the site.">
+<meta name="twitter:description" content="Every good build starts as a drawing. Foreman makes your agent do the drawing first.">
 <meta name="twitter:image" content="https://turki-sh.github.io/Foreman/og.png">
+
+<link rel="preload" href="fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 
 <script type="application/ld+json">
 {
@@ -37,7 +40,7 @@
   "url": "https://turki-sh.github.io/Foreman/",
   "codeRepository": "https://github.com/Turki-Sh/Foreman",
   "license": "https://opensource.org/licenses/MIT",
-  "softwareVersion": "1.2.0",
+  "softwareVersion": "1.3.0",
   "description": "A build playbook that turns a coding agent into the foreman of a website build.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "author": {
@@ -55,223 +58,276 @@
 </script>
 
 <style>
-  :root {
-    --bg:      #F4F5F7;
-    --surface: #FFFFFF;
-    --sunken:  #ECEEF1;
-    --text:    #12171D;
-    --muted:   #5C6672;
-    --line:    #DCE0E5;
-    --accent:  #C77E00;
-    --rail:    #C77E00;
+  /* ---------------------------------------------------------------
+     FOREMAN
+     Direction: technical sheet. White paper, drafting language,
+     blue used only where it carries information.
+     Locked tokens, chosen in Phase 2. Do not substitute.
+     --------------------------------------------------------------- */
 
-    --display: system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-
-    --step-lg: clamp(2.1rem, 5.2vw, 3.6rem);
-    --step-md: 1.0625rem;
-    --step-sm: 0.8125rem;
-
-    --wrap: 60rem;
+  @font-face {
+    font-family: "Barlow Condensed";
+    src: url("fonts/barlow-condensed-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg:      #0E1116;
-      --surface: #161B22;
-      --sunken:  #10151B;
-      --text:    #E6EDF3;
-      --muted:   #8B949E;
-      --line:    #232A33;
-      --accent:  #FFB400;
-      --rail:    #FFB400;
-    }
+  :root {
+    --paper: #FFFFFF;
+    --ink:   #0A0A0A;
+    --muted: #767676;
+    --blue:  #1B4DD1;
+    --tint:  #DDE5FA;
+    --hair:  #E4E4E4;
+
+    --display: "Barlow Condensed", "Arial Narrow", "Avenir Next Condensed", system-ui, sans-serif;
+    --body:    system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    --wrap: 68rem;
+    --gut: 1.75rem;
   }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--ink) var(--paper);
+    scrollbar-width: thin;
+  }
+
+  /* Custom scrollbar: a drafting rule down the edge of the sheet. */
+  ::-webkit-scrollbar { width: 13px; height: 13px; }
+  ::-webkit-scrollbar-track { background: var(--paper); border-left: 1px solid var(--hair); }
+  ::-webkit-scrollbar-thumb { background: var(--ink); border: 4px solid var(--paper); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+  ::-webkit-scrollbar-corner { background: var(--paper); }
+
+  ::selection { background: var(--tint); color: var(--ink); }
 
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--display);
-    font-size: var(--step-md);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1rem;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 1.5rem; }
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gut); }
 
   a { color: inherit; }
   a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--blue);
     outline-offset: 3px;
-    border-radius: 2px;
   }
 
   .skip {
-    position: absolute; left: -9999px; top: 0;
-    background: var(--text); color: var(--bg);
-    padding: .75rem 1rem; z-index: 10; text-decoration: none;
+    position: absolute; left: -9999px; top: 0; z-index: 20;
+    background: var(--ink); color: var(--paper);
+    padding: .75rem 1rem; text-decoration: none;
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
   }
   .skip:focus { left: 0; }
 
-  .eyebrow {
+  /* ---------- drafting language ---------- */
+
+  .lbl {
     font-family: var(--mono);
-    font-size: 0.6875rem;
-    letter-spacing: .16em;
+    font-size: .6875rem;
+    letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
+  .boxlbl {
+    display: inline-block;
+    border: 1px solid var(--ink);
+    padding: .3rem .55rem;
+    font-family: var(--mono);
+    font-size: .6875rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -.005em;
+    margin: 0;
+  }
+
+  h1 { font-size: clamp(2.9rem, 8.4vw, 6.5rem); line-height: .9; }
+  h2 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: .95; margin-bottom: 1rem; }
+  h3 { font-size: 1.3rem; line-height: 1.05; margin-bottom: .35rem; }
+
+  p { margin: 0 0 1rem; max-width: 60ch; }
+  .sub { color: var(--muted); font-size: 1.0625rem; line-height: 1.55; max-width: 44ch; }
+  .dim { color: var(--muted); }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: .75rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .8rem 1.2rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    transition: background .16s ease, color .16s ease;
+  }
+  .btn:hover { background: var(--blue); border-color: var(--blue); }
+  .btn.o { background: transparent; color: var(--ink); }
+  .btn.o:hover { background: var(--ink); color: var(--paper); }
+
   /* ---------- header ---------- */
 
-  header { border-bottom: 1px solid var(--line); }
-  .bar {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1rem; padding: 1.125rem 0;
-  }
-  .mark { display: flex; align-items: center; gap: .5rem; font-weight: 650; letter-spacing: -0.01em; }
-  .mark svg { display: block; }
-  .bar nav { display: flex; gap: 1.25rem; font-size: var(--step-sm); color: var(--muted); }
+  header { border-bottom: 1px solid var(--hair); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; }
+  .brand { display: flex; align-items: center; gap: .625rem; font-weight: 700; font-size: 1.0625rem; letter-spacing: -.01em; }
+  .brand img { width: 26px; height: 26px; display: block; image-rendering: pixelated; }
+  .bar nav { display: flex; gap: 1.1rem; }
   .bar nav a { text-decoration: none; }
-  .bar nav a:hover { color: var(--text); }
+  .bar nav a:hover { color: var(--blue); }
 
   /* ---------- hero ---------- */
 
-  .hero { padding: 4.5rem 0 3.5rem; }
-  h1 {
-    font-size: var(--step-lg);
-    line-height: 1.04;
-    letter-spacing: -0.03em;
-    font-weight: 660;
-    margin: .875rem 0 1rem;
-    max-width: 20ch;
-  }
-  .lede { font-size: 1.1875rem; line-height: 1.5; color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
-  .lede strong { color: var(--text); font-weight: 600; }
+  .hero { padding: 3.5rem 0 3rem; }
+  .hero .cols { display: grid; grid-template-columns: 1.08fr .92fr; gap: 3.25rem; align-items: start; }
+  .hero h1 { margin: 1.1rem 0 1.25rem; max-width: 12ch; }
+  .cta { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.75rem; }
 
-  .cta { display: flex; flex-wrap: wrap; gap: .625rem; align-items: center; }
-  .btn {
-    display: inline-block; padding: .7rem 1.15rem; border-radius: 5px;
-    text-decoration: none; font-size: .9375rem; font-weight: 600;
-    background: var(--text); color: var(--bg); border: 1px solid var(--text);
+  /* Signature element: the sheet draws itself, once. */
+  .drawing { width: 100%; height: auto; display: block; }
+  .drawing .ln { stroke: var(--blue); fill: none; stroke-linecap: round; }
+  .drawing .frame { stroke: var(--ink); }
+  .drawing .lead { stroke: var(--muted); stroke-dasharray: 3 3; stroke-width: 1; }
+  .drawing text {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; fill: var(--blue);
   }
-  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
-  .btn:hover { opacity: .88; }
+  .drawing .dot { fill: var(--blue); stroke: none; }
 
-  /* ---------- signature element: the first exchange ---------- */
-
-  .exchange {
-    margin-top: 3rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
+  .sheet { border: 1px solid var(--hair); padding: 1.25rem 1.25rem 1rem; position: relative; }
+  .sheet > .lbl.tab {
+    position: absolute; top: -.55rem; left: 1rem;
+    background: var(--paper); padding: 0 .4rem;
   }
-  .exchange-head {
-    display: flex; align-items: center; gap: .5rem;
-    padding: .625rem .875rem;
-    border-bottom: 1px solid var(--line);
-    background: var(--sunken);
+  .sheet figcaption {
+    margin-top: .875rem; padding-top: .75rem; border-top: 1px solid var(--hair);
+    font-family: var(--mono); font-size: .6875rem; color: var(--muted); letter-spacing: .06em;
   }
-  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
-  .exchange-head .eyebrow { margin-left: .375rem; }
-  .exchange-body { padding: 1.25rem .875rem 1.375rem; font-family: var(--mono); font-size: .875rem; line-height: 1.7; }
-
-  .turn { display: grid; grid-template-columns: 4.5rem 1fr; gap: .875rem; padding: .5rem 0; }
-  .turn + .turn { border-top: 1px dashed var(--line); margin-top: .5rem; padding-top: 1rem; }
-  .who { color: var(--muted); font-size: .75rem; letter-spacing: .04em; padding-top: .15rem; }
-  .turn.agent .who { color: var(--accent); }
-  .said { margin: 0; }
-  .said em { color: var(--muted); font-style: normal; }
-
-  .verdict {
-    margin: 0;
-    max-width: none;
-    border-top: 1px solid var(--line);
-    padding: .875rem;
-    font-size: .8125rem;
-    color: var(--muted);
-    background: var(--sunken);
-  }
-  .verdict b { color: var(--text); font-weight: 600; }
 
   /* ---------- sections ---------- */
 
-  section { padding: 3.75rem 0; border-top: 1px solid var(--line); }
-  h2 {
-    font-size: 1.5rem; letter-spacing: -0.02em; font-weight: 640;
-    margin: .625rem 0 1.25rem; max-width: 24ch;
+  section { padding: 3.25rem 0; border-top: 1px solid var(--hair); }
+  .head { margin-bottom: 1.75rem; }
+  .head .lbl { display: block; margin-bottom: .5rem; }
+
+  /* numbered hatched rows */
+  .rows { border-top: 1px solid var(--hair); }
+  .row {
+    display: grid; grid-template-columns: 2rem 1fr auto; gap: 1rem;
+    align-items: center; padding: .8rem 0; border-bottom: 1px solid var(--hair);
   }
-  h3 { font-size: 1rem; font-weight: 640; margin: 0 0 .375rem; letter-spacing: -0.01em; }
-  p { max-width: 62ch; }
-  .dim { color: var(--muted); }
-
-  /* ---------- the rail: seven phases ---------- */
-
-  .rail { list-style: none; margin: 1.5rem 0 0; padding: 0; border-left: 2px solid var(--rail); }
-  .rail li { position: relative; padding: 0 0 1.375rem 1.5rem; }
-  .rail li::before {
-    content: ""; position: absolute; left: -5px; top: .5rem;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--bg); border: 2px solid var(--rail);
+  .row .n { font-family: var(--mono); font-size: .75rem; color: var(--muted); }
+  .row .hatch {
+    height: 7px; min-width: 1rem;
+    background: repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 5px);
+    opacity: .45;
   }
-  .rail li:last-child { padding-bottom: 0; }
-  .rail .phase { font-family: var(--mono); font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .rail .gate { font-size: .875rem; color: var(--muted); }
-  .rail .gate b { color: var(--text); font-weight: 600; }
+  .row .t { font-family: var(--mono); font-size: .75rem; letter-spacing: .07em; text-transform: uppercase; text-align: right; }
+  .row .g { grid-column: 2 / -1; font-size: .875rem; color: var(--muted); max-width: 60ch; }
+  .row.two { grid-template-columns: 2rem 1fr auto; row-gap: .3rem; }
 
-  /* ---------- comparison ---------- */
-
-  .compare { width: 100%; min-width: 34rem; border-collapse: collapse; margin-top: 1.25rem; font-size: .9375rem; }
-  .compare th, .compare td { text-align: left; padding: .75rem .875rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .compare thead th { font-family: var(--mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
-  .compare tbody th { font-weight: 600; width: 22%; }
-  .compare td:first-of-type { color: var(--muted); }
+  /* comparison */
   .scroller { overflow-x: auto; }
+  table { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: .9375rem; }
+  th, td { text-align: left; padding: .7rem .8rem; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  thead th {
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em;
+    text-transform: uppercase; color: var(--muted); font-weight: 500;
+  }
+  tbody th { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; width: 20%; }
+  td:first-of-type { color: var(--muted); }
 
-  /* ---------- box ---------- */
-
-  .box { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: 1.5rem; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 1.125rem; }
-  .card .n { font-family: var(--mono); font-size: 1.75rem; font-weight: 600; color: var(--accent); line-height: 1; display: block; margin-bottom: .5rem; }
+  /* inventory */
+  .box { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); border: 1px solid var(--hair); }
+  .card { padding: 1.25rem; border-right: 1px solid var(--hair); }
+  .card:last-child { border-right: 0; }
+  .card .n { font-family: var(--display); font-size: 3rem; line-height: .85; color: var(--blue); display: block; margin-bottom: .5rem; }
   .card p { font-size: .875rem; color: var(--muted); margin: 0; }
 
-  /* ---------- install ---------- */
-
-  .install { margin-top: 1.5rem; display: grid; gap: 1.25rem; }
-  .install h3 { margin-bottom: .5rem; }
+  /* install */
+  .install { display: grid; gap: 1.5rem; }
   pre {
-    margin: 0; background: var(--surface); border: 1px solid var(--line);
-    border-radius: 6px; padding: .875rem 1rem; overflow-x: auto;
-    font-family: var(--mono); font-size: .8125rem; line-height: 1.7;
+    margin: 0; background: var(--paper); border: 1px solid var(--hair);
+    padding: .8rem .9rem; overflow-x: auto;
+    font-family: var(--mono); font-size: .8125rem; line-height: 1.75;
   }
-  .copyrow { display: flex; gap: .5rem; align-items: flex-start; }
+  .copyrow { display: flex; gap: .5rem; align-items: stretch; }
   .copyrow pre { flex: 1; }
   .copy {
     font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
-    background: transparent; color: var(--muted); border: 1px solid var(--line);
-    border-radius: 6px; padding: .6rem .7rem; cursor: pointer; white-space: nowrap;
+    background: transparent; color: var(--muted); border: 1px solid var(--hair);
+    padding: 0 .7rem; cursor: pointer; white-space: nowrap;
+    transition: color .16s ease, border-color .16s ease;
   }
-  .copy:hover { color: var(--text); }
+  .copy:hover { color: var(--ink); border-color: var(--ink); }
 
-  /* ---------- footer ---------- */
+  /* ---------- footer / title block ---------- */
 
-  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; font-size: .875rem; color: var(--muted); }
-  footer a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
-  footer a:hover { border-color: var(--accent); }
-  .links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 1rem 0 0; }
+  footer { border-top: 1px solid var(--hair); padding: 2.25rem 0 3rem; }
+  .foot { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: flex-end; }
+  .foot p { font-size: .875rem; color: var(--muted); max-width: 52ch; margin: 0; }
+  .foot a { color: var(--ink); }
+  .links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .875rem; }
+  .links a { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--hair); padding-bottom: 2px; }
+  .links a:hover { border-color: var(--blue); color: var(--blue); }
 
+  .titleblock {
+    border: 1px solid var(--ink);
+    display: grid; grid-template-columns: auto auto;
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em;
+  }
+  .titleblock div { padding: .45rem .7rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .titleblock div:nth-child(2n) { border-right: 0; }
+  .titleblock div:nth-last-child(-n+2) { border-bottom: 0; }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 56rem) {
+    .hero .cols { grid-template-columns: 1fr; gap: 2.25rem; }
+    .hero h1 { max-width: 14ch; }
+    .card { border-right: 0; border-bottom: 1px solid var(--hair); }
+    .card:last-child { border-bottom: 0; }
+  }
   @media (max-width: 34rem) {
-    .turn { grid-template-columns: 1fr; gap: .25rem; }
     .bar nav { display: none; }
+    .row .t { text-align: left; grid-column: 2 / -1; }
+    .row { grid-template-columns: 2rem 1fr; }
+    .row .hatch { display: none; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
+  /* ---------- the one animation ----------
+     The drawing draws itself, once, on load. Nothing else on this page moves
+     except things you are pointing at. */
+  @media (prefers-reduced-motion: no-preference) {
+    .drawing .ink-path {
+      stroke-dasharray: var(--len);
+      stroke-dashoffset: var(--len);
+      animation: draw 1.5s cubic-bezier(.22,.61,.36,1) forwards;
+      animation-delay: calc(var(--i) * 55ms);
+    }
+    .drawing .fade { opacity: 0; animation: fade .5s ease forwards; animation-delay: calc(900ms + var(--i) * 60ms); }
   }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fade { to { opacity: 1; } }
 </style>
 </head>
 <body>
@@ -280,18 +336,15 @@
 
 <header>
   <div class="wrap bar">
-    <div class="mark">
-      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true">
-        <rect width="32" height="32" rx="5" fill="currentColor" opacity=".08"></rect>
-        <path d="M9 23V9h14v3.4h-10.4v2.9H21v3.4h-8.4V23z" fill="var(--accent)"></path>
-      </svg>
+    <div class="brand">
+      <img src="icon-32.png" width="26" height="26" alt="" aria-hidden="true">
       Foreman
     </div>
-    <nav>
-      <a href="#what">What changes</a>
-      <a href="#box">What is in it</a>
-      <a href="#install">Install</a>
-      <a href="https://github.com/Turki-Sh/Foreman">GitHub</a>
+    <nav class="lbl">
+      <a href="#changes">[ what changes ]</a>
+      <a href="#phases">[ phases ]</a>
+      <a href="#install">[ install ]</a>
+      <a href="https://github.com/Turki-Sh/Foreman">[ github ]</a>
     </nav>
   </div>
 </header>
@@ -299,52 +352,104 @@
 <main id="main">
 
   <div class="wrap hero">
-    <p class="eyebrow">A build playbook · v1.2.0 · MIT</p>
-    <h1>Your agent's ceiling is your brief.</h1>
-    <p class="lede">
-      Coding agents removed the cost of writing a site. They did not remove the cost of
-      deciding what it should be. <strong>Foreman is the missing half.</strong>
-    </p>
-
-    <div class="cta">
-      <a class="btn" href="#install">Install it</a>
-      <a class="btn ghost" href="https://github.com/Turki-Sh/Foreman">Read every line first</a>
-    </div>
-
-    <!-- Signature element: the first message, which is the whole demo. -->
-    <div class="exchange">
-      <div class="exchange-head">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="eyebrow">The first message, with Foreman installed</span>
-      </div>
-      <div class="exchange-body">
-        <div class="turn">
-          <span class="who">you</span>
-          <p class="said">help me build my portfolio</p>
-        </div>
-        <div class="turn agent">
-          <span class="who">agent</span>
-          <p class="said">
-            Before any code, I need two things from you: what you are building, and what you
-            already have for it. Copy, CV, screenshots, a logo, a domain, anything.<br><br>
-            Then we make the decisions that decide whether this looks like yours or like
-            every other generated site.
-          </p>
+    <div class="cols">
+      <div>
+        <span class="boxlbl">A build playbook · v1.3.0 · MIT</span>
+        <h1>Every good build starts as a drawing.</h1>
+        <p class="sub">
+          Foreman makes your agent do the drawing first: the interview, the decisions,
+          the locked system, the brief. Then the code, then the domain, then indexed.
+        </p>
+        <div class="cta">
+          <a class="btn" href="#install">Install it</a>
+          <a class="btn o" href="https://github.com/Turki-Sh/Foreman">Read every line</a>
         </div>
       </div>
-      <p class="verdict">
-        <b>No code yet.</b> That is the whole point. Without a playbook, the same message
-        returns a finished page built on assumptions you never made.
-      </p>
+
+      <figure class="sheet" style="margin:0">
+        <span class="lbl tab">[ sheet 1 ]</span>
+        <svg class="drawing" viewBox="0 0 480 400" role="img"
+             aria-label="A hand-drawn wireframe of a web page, annotated with the decisions Foreman forces: a one-sentence hero, one primary action, and real projects only.">
+          <defs>
+            <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="9" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <g filter="url(#rough)">
+            <!-- page outline -->
+            <path class="ln frame ink-path" style="--i:0" stroke-width="2"
+                  d="M22 30 L286 27 L289 344 L20 347 Z"/>
+            <!-- nav rule -->
+            <path class="ln ink-path" style="--i:1" stroke-width="1.4" d="M22 66 C 110 68, 210 64, 286 63"/>
+            <!-- hero lines -->
+            <path class="ln ink-path" style="--i:2" stroke-width="1.6" d="M42 104 L182 102"/>
+            <path class="ln ink-path" style="--i:3" stroke-width="1.6" d="M42 124 L232 122"/>
+            <path class="ln ink-path" style="--i:4" stroke-width="1.6" d="M42 144 L146 143"/>
+            <!-- primary action -->
+            <path class="ln ink-path" style="--i:5" stroke-width="1.6" d="M42 176 L118 176 L118 202 L42 202 Z"/>
+            <!-- body rules -->
+            <path class="ln ink-path" style="--i:6" stroke-width="1.4" d="M42 240 L266 238"/>
+            <path class="ln ink-path" style="--i:7" stroke-width="1.4" d="M42 258 L220 256"/>
+            <!-- project cards -->
+            <path class="ln ink-path" style="--i:8" stroke-width="1.5" d="M42 288 L110 288 L110 322 L42 322 Z"/>
+            <path class="ln ink-path" style="--i:9" stroke-width="1.5" d="M120 288 L188 288 L188 322 L120 322 Z"/>
+            <path class="ln ink-path" style="--i:10" stroke-width="1.5" d="M198 288 L266 288 L266 322 L198 322 Z"/>
+          </g>
+
+          <!-- annotation leaders, kept clear of the drawing in their own gutter -->
+          <g class="fade" style="--i:1">
+            <path class="ln lead" d="M182 102 L306 102"/>
+            <circle class="dot" cx="182" cy="102" r="2.4"/>
+            <text x="312" y="98">One sentence</text>
+          </g>
+          <g class="fade" style="--i:2">
+            <path class="ln lead" d="M118 189 L306 189"/>
+            <circle class="dot" cx="118" cy="189" r="2.4"/>
+            <text x="312" y="185">One action</text>
+          </g>
+          <g class="fade" style="--i:3">
+            <path class="ln lead" d="M266 305 L306 305"/>
+            <circle class="dot" cx="266" cy="305" r="2.4"/>
+            <text x="312" y="301">Real projects only</text>
+          </g>
+        </svg>
+        <figcaption>Fig. 1 · What the interview decides, before any code exists.</figcaption>
+      </figure>
     </div>
   </div>
 
-  <section id="what">
+  <section id="first">
     <div class="wrap">
-      <p class="eyebrow">The difference</p>
-      <h2>Same agent, same model, different session.</h2>
+      <div class="head">
+        <span class="lbl">[ the first message ]</span>
+        <h2>It answers with questions, not code.</h2>
+      </div>
       <div class="scroller">
-        <table class="compare">
+        <pre>&gt; help me build my portfolio
+
+Before any code, I need two things from you: what you are
+building, and what you already have for it. Copy, CV,
+screenshots, a logo, a domain, anything.
+
+Then we make the decisions that decide whether this looks
+like yours or like every other generated site.</pre>
+      </div>
+      <p class="dim" style="font-size:.875rem; margin-top:.875rem;">
+        Without a playbook, that same message returns a finished page built on assumptions you never made.
+      </p>
+    </div>
+  </section>
+
+  <section id="changes">
+    <div class="wrap">
+      <div class="head">
+        <span class="lbl">[ the difference ]</span>
+        <h2>Same agent, same model, different session.</h2>
+      </div>
+      <div class="scroller">
+        <table>
           <thead>
             <tr><th scope="col"></th><th scope="col">Without Foreman</th><th scope="col">With Foreman</th></tr>
           </thead>
@@ -363,47 +468,54 @@
 
   <section id="phases">
     <div class="wrap">
-      <p class="eyebrow">The session</p>
-      <h2>Seven phases. Each one has a gate it will not pass.</h2>
-      <p class="dim">Your agent runs this. You do not read it, and it does not narrate it at you.</p>
-      <ol class="rail">
-        <li>
-          <span class="phase">Phase 0 · Orient</span>
-          <p class="gate"><b>Gate:</b> it knows the subject and your asset inventory.</p>
-        </li>
-        <li>
-          <span class="phase">Phase 1 · Decide</span>
-          <p class="gate"><b>Gate:</b> one job, one action, a register, non-goals, and draft copy for every section, in writing.</p>
-        </li>
-        <li>
-          <span class="phase">Phase 2 · Lock the visual system</span>
-          <p class="gate"><b>Gate:</b> exact hex values, exact font names, a type scale, and one named signature element.</p>
-        </li>
-        <li>
-          <span class="phase">Phase 3 · Write the brief</span>
-          <p class="gate"><b>Gate:</b> a frozen brief you have read and approved.</p>
-        </li>
-        <li>
-          <span class="phase">Phase 4 · Handoff and iterate</span>
-          <p class="gate"><b>Gate:</b> it builds with zero errors and you have seen it at 375px.</p>
-        </li>
-        <li>
-          <span class="phase">Phase 5 and 6 · Verify and ship</span>
-          <p class="gate"><b>Gate:</b> evidence, not assurances. Then the domain resolves over HTTPS in incognito.</p>
-        </li>
-        <li>
-          <span class="phase">Phase 7 · Index</span>
-          <p class="gate"><b>Gate:</b> the sitemap is submitted and the shared link renders its card.</p>
-        </li>
-      </ol>
+      <div class="head">
+        <span class="lbl">[ the session ]</span>
+        <h2>Seven phases. Each has a gate it will not pass.</h2>
+        <p class="dim" style="font-size:.9375rem;">Your agent runs this. You do not read it, and it does not narrate it at you.</p>
+      </div>
+      <div class="rows">
+        <div class="row two">
+          <span class="n">00</span><span class="hatch"></span><span class="t">Orient</span>
+          <p class="g">It knows the subject and your asset inventory.</p>
+        </div>
+        <div class="row two">
+          <span class="n">01</span><span class="hatch"></span><span class="t">Decide</span>
+          <p class="g">One job, one action, a register, non-goals, and draft copy for every section, in writing.</p>
+        </div>
+        <div class="row two">
+          <span class="n">02</span><span class="hatch"></span><span class="t">Lock the system</span>
+          <p class="g">Exact hex values, exact font names, a type scale, and one named signature element.</p>
+        </div>
+        <div class="row two">
+          <span class="n">03</span><span class="hatch"></span><span class="t">Write the brief</span>
+          <p class="g">A frozen brief you have read and approved.</p>
+        </div>
+        <div class="row two">
+          <span class="n">04</span><span class="hatch"></span><span class="t">Handoff</span>
+          <p class="g">It builds with zero errors and you have seen it at 375px.</p>
+        </div>
+        <div class="row two">
+          <span class="n">05</span><span class="hatch"></span><span class="t">Verify · ship</span>
+          <p class="g">Evidence, not assurances. Then the domain resolves over HTTPS in incognito.</p>
+        </div>
+        <div class="row two">
+          <span class="n">06</span><span class="hatch"></span><span class="t">Index</span>
+          <p class="g">The sitemap is submitted and the shared link renders its card.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="box">
     <div class="wrap">
-      <p class="eyebrow">What is in it</p>
-      <h2>Markdown and templates. Nothing executes.</h2>
-      <p class="dim">No scripts, no hooks, no MCP servers, no network calls. You can read every line before you trust it, which is the only sane way to install something that talks to your agent.</p>
+      <div class="head">
+        <span class="lbl">[ what is in it ]</span>
+        <h2>Markdown and templates. Nothing executes.</h2>
+        <p class="dim" style="font-size:.9375rem;">
+          No scripts, no hooks, no MCP servers, no network calls. You can read every line
+          before you trust it, which is the only sane way to install something that talks to your agent.
+        </p>
+      </div>
       <div class="box">
         <div class="card">
           <span class="n">9</span>
@@ -426,12 +538,14 @@
 
   <section id="install">
     <div class="wrap">
-      <p class="eyebrow">Install</p>
-      <h2>One folder of markdown. It goes anywhere an agent reads files.</h2>
+      <div class="head">
+        <span class="lbl">[ install ]</span>
+        <h2>One folder of markdown. It goes anywhere an agent reads files.</h2>
+      </div>
 
       <div class="install">
         <div>
-          <h3>Claude Code</h3>
+          <p class="lbl" style="margin-bottom:.5rem;">Claude Code</p>
           <div class="copyrow">
 <pre id="cc">/plugin marketplace add Turki-Sh/Foreman
 /plugin install foreman@alshuaibi</pre>
@@ -440,68 +554,81 @@
         </div>
 
         <div>
-          <h3>Cursor, Windsurf, Codex, Copilot, Gemini CLI, or any coding agent</h3>
+          <p class="lbl" style="margin-bottom:.5rem;">Cursor · Windsurf · Codex · Copilot · Gemini CLI · any coding agent</p>
           <div class="copyrow">
 <pre id="uni">git clone https://github.com/Turki-Sh/Foreman.git
 cp -r Foreman/plugins/foreman/skills/foreman ~/.agents/skills/</pre>
             <button class="copy" data-for="uni" type="button">Copy</button>
           </div>
-          <p class="dim" style="font-size:.8125rem; margin-top:.625rem;">
+          <p class="dim" style="font-size:.8125rem; margin-top:.5rem;">
             Per-tool paths are in <a href="https://github.com/Turki-Sh/Foreman/blob/main/AGENTS.md">AGENTS.md</a>.
           </p>
         </div>
 
         <div>
-          <h3>Claude apps, or any assistant with no skills support</h3>
-          <p class="dim" style="font-size:.9375rem;">
+          <p class="lbl" style="margin-bottom:.5rem;">Claude apps, or any assistant with no skills support</p>
+          <p style="font-size:.9375rem; margin:0;">
             Upload <a href="https://github.com/Turki-Sh/Foreman/raw/main/dist/foreman.skill">foreman.skill</a>,
             or paste <a href="https://github.com/Turki-Sh/Foreman/blob/main/plugins/foreman/skills/foreman/SKILL.md">SKILL.md</a>
             into the conversation and say "run this on me."
           </p>
         </div>
-      </div>
 
-      <p style="margin-top:2rem;"><span class="eyebrow">Then say</span></p>
-      <pre style="margin-top:.5rem;">help me build my portfolio</pre>
-      <p class="dim" style="font-size:.9375rem; margin-top:.75rem;">
-        The agent should answer with two questions, not with code. If it starts writing HTML,
-        it did not load.
-      </p>
+        <div>
+          <p class="lbl" style="margin-bottom:.5rem;">Then say</p>
+          <pre>help me build my portfolio</pre>
+          <p class="dim" style="font-size:.875rem; margin-top:.5rem;">
+            It should answer with two questions, not with code. If it starts writing HTML, it did not load.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <div class="wrap">
-    <p style="margin:0; max-width:62ch;">
-      Built by <a href="https://turkialshuaibi.com/">Turki Alshuaibi</a>, AI engineer, from a
-      session delivered to the KAUST Academy AI cohort on building and shipping with agents.
-      Everything in it came from shipping, and from watching capable engineers get stuck in the
-      same nine places.
-    </p>
-    <div class="links">
-      <a href="https://github.com/Turki-Sh/Foreman">Repository</a>
-      <a href="https://turkialshuaibi.com/">turkialshuaibi.com</a>
-      <a href="https://linkedin.com/in/turki-alshuaibi">LinkedIn</a>
-      <a href="https://github.com/Turki-Sh">GitHub</a>
-      <a href="https://github.com/Turki-Sh/Foreman/blob/main/LICENSE">MIT</a>
+  <div class="wrap foot">
+    <div>
+      <p>
+        Built by <a href="https://turkialshuaibi.com/">Turki Alshuaibi</a>, AI engineer, from a session
+        delivered to the KAUST Academy AI cohort on building and shipping with agents. Everything in it
+        came from shipping, and from watching capable engineers get stuck in the same nine places.
+      </p>
+      <div class="links">
+        <a href="https://github.com/Turki-Sh/Foreman">Repository</a>
+        <a href="https://turkialshuaibi.com/">turkialshuaibi.com</a>
+        <a href="https://linkedin.com/in/turki-alshuaibi">LinkedIn</a>
+        <a href="https://github.com/Turki-Sh">GitHub</a>
+      </div>
+    </div>
+
+    <div class="titleblock">
+      <div><b>FOREMAN</b></div><div>OVERVIEW</div>
+      <div>BLUEPRINT NO. 1</div><div>V1.3.0</div>
+      <div>T. ALSHUAIBI</div><div>MIT</div>
     </div>
   </div>
 </footer>
 
 <script>
-  // Progressive enhancement only. The commands are selectable without this.
-  document.querySelectorAll('.copy').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var el = document.getElementById(b.dataset.for);
-      navigator.clipboard.writeText(el.textContent.trim()).then(function () {
-        var t = b.textContent;
+  // Give every drawn path its true length so the line-drawing animation is
+  // proportional instead of guessed. Progressive enhancement: without this the
+  // paths are simply already drawn.
+  for (const p of document.querySelectorAll('.drawing .ink-path')) {
+    p.style.setProperty('--len', Math.ceil(p.getTotalLength()));
+  }
+
+  for (const b of document.querySelectorAll('.copy')) {
+    b.addEventListener('click', () => {
+      const el = document.getElementById(b.dataset.for);
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const t = b.textContent;
         b.textContent = 'Copied';
-        setTimeout(function () { b.textContent = t; }, 1400);
+        setTimeout(() => { b.textContent = t; }, 1400);
       });
     });
-  });
+  }
 </script>
 
 </body>
