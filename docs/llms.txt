@@ -1,0 +1,26 @@
+# Foreman
+
+> A build playbook that turns a coding agent into the foreman of a website build. It interviews the owner, forces the design and scope decisions, locks a visual system, writes one build brief, hands that brief to a coding agent, then verifies, ships, and indexes the site.
+
+Foreman is an Agent Skill, distributed as a Claude Code plugin and as a plain folder of markdown that works with any agent that reads files. It contains no executable code: no scripts, no hooks, no MCP servers, no network calls. The product is a seven-phase session flow with gates, nine reference documents loaded only when their phase arrives, and six fillable templates.
+
+Its governing claim is that the quality of an agent's output is bounded by the quality of the brief it was given, so the work of a good build is decision-making rather than typing. It is written for the agent to run, not for a person to read.
+
+Author: Turki Alshuaibi, AI engineer, Saudi Arabia. Released under MIT.
+
+## Pages
+- [/](https://turki-sh.github.io/Foreman/): what Foreman is, what changes when you use it, the seven phases and their gates, and install instructions for Claude Code, Claude apps, and other coding agents.
+
+## Source
+- Repository: https://github.com/Turki-Sh/Foreman
+- The skill itself: https://github.com/Turki-Sh/Foreman/blob/main/plugins/foreman/skills/foreman/SKILL.md
+- Cross-tool install paths: https://github.com/Turki-Sh/Foreman/blob/main/AGENTS.md
+
+## Install
+- Claude Code: `/plugin marketplace add Turki-Sh/Foreman` then `/plugin install foreman@alshuaibi`
+- Any other agent: copy `plugins/foreman/skills/foreman/` into the agent's skills directory
+
+## Author
+- Site: https://turkialshuaibi.com
+- GitHub: https://github.com/Turki-Sh
+- LinkedIn: https://linkedin.com/in/turki-alshuaibi

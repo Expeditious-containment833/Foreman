@@ -1,0 +1,5 @@
+# Foreman: allow everything, and point crawlers at the sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: https://turki-sh.github.io/Foreman/sitemap.xml

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · Foreman</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230E1116'/%3E%3Cpath d='M9 23V9h14v3.4h-10.4v2.9H21v3.4h-8.4V23z' fill='%23FFB400'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #F4F5F7; --surface: #FFFFFF; --text: #12171D; --muted: #5C6672;
+    --line: #DCE0E5; --accent: #C77E00;
+    --display: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1116; --surface: #161B22; --text: #E6EDF3; --muted: #8B949E;
+      --line: #232A33; --accent: #FFB400;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100dvh; background: var(--bg); color: var(--text);
+    font-family: var(--display); line-height: 1.6;
+    display: grid; place-items: center; padding: 1.5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 44ch; }
+  .eyebrow {
+    font-family: var(--mono); font-size: .6875rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 1rem;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.08;
+    letter-spacing: -0.03em; font-weight: 660; margin: 0 0 .75rem;
+  }
+  p.body { color: var(--muted); margin: 0 0 1.75rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .625rem; }
+  a {
+    display: inline-block; padding: .7rem 1.15rem; border-radius: 5px;
+    text-decoration: none; font-size: .9375rem; font-weight: 600;
+    background: var(--text); color: var(--bg); border: 1px solid var(--text);
+  }
+  a.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  a:hover { opacity: .88; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">404</p>
+  <h1>That page isn't here.</h1>
+  <p class="body">The link may be old, or the address may have a typo in it. Everything else is still where it was.</p>
+  <div class="actions">
+    <a href="/Foreman/">Back to Foreman</a>
+    <a class="ghost" href="https://github.com/Turki-Sh/Foreman">The repository</a>
+  </div>
+</main>
+</body>
+</html>
