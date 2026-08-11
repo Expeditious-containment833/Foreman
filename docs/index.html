@@ -99,6 +99,11 @@
     --sheetText: #EAF1FA;
     --amber:     #FFB400;
 
+    /* The headline cutout: white gridlines on blue, the way a real blueprint
+       reads. Against near black ink this has to be genuinely blue to register. */
+    --letterFill: #2A6FE0;
+    --letterLine: rgba(255, 255, 255, .62);
+
     --display: "Barlow Condensed", "Arial Narrow", "Avenir Next Condensed", system-ui, sans-serif;
     --body:    system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -116,6 +121,11 @@
     --tint:  #143A66;
     --hair:  #1B3D6B;
     --sheet: #061A33;
+
+    /* On navy paper the cutout goes lighter, not darker, or the letters
+       disappear into the page. */
+    --letterFill: #3B82D8;
+    --letterLine: rgba(255, 255, 255, .65);
   }
 
   * { box-sizing: border-box; }
@@ -249,6 +259,57 @@
   .hero { padding: 3.5rem 0 3rem; }
   .hero .cols { display: grid; grid-template-columns: 1.08fr .92fr; gap: 3.25rem; align-items: start; }
   .hero h1 { margin: 1.1rem 0 1.25rem; max-width: 12ch; }
+
+  /* ---------- the headline, drawn ----------
+     On hover the letterforms become cutouts onto a blueprint sheet, revealed in
+     a soft circle that follows the cursor. Pointer devices only: there is no
+     hover on a phone, and a permanently half-filled headline is just noise. */
+
+  @property --reveal {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+  }
+
+  .drawn { position: relative; }
+  .drawn-base { display: block; }
+
+  .drawn-grid {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+    color: transparent;
+
+    /* Two hairlines over a solid fill, clipped to the glyphs. */
+    background-image:
+      linear-gradient(var(--letterLine) 1px, transparent 1px),
+      linear-gradient(90deg, var(--letterLine) 1px, transparent 1px),
+      linear-gradient(var(--letterFill), var(--letterFill));
+    background-size: 13px 13px, 13px 13px, 100% 100%;
+    background-position: var(--mx, 50%) var(--my, 50%), var(--mx, 50%) var(--my, 50%), 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    --reveal: 0px;
+    -webkit-mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+      #000 0, #000 var(--reveal), transparent calc(var(--reveal) + 46px));
+    mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+      #000 0, #000 var(--reveal), transparent calc(var(--reveal) + 46px));
+    /* Held at zero opacity at rest. The mask alone is not enough: a zero radius
+       radial gradient still leaves a soft blob at its centre, which showed as a
+       permanent blue smudge mid headline on every device that cannot hover. */
+    opacity: 0;
+    transition: --reveal .5s cubic-bezier(.22, .61, .36, 1), opacity .22s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .drawn:hover .drawn-grid { opacity: 1; --reveal: 170px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .drawn-grid { transition: none; }
+  }
   .cta { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.75rem; }
 
   /* Signature element: the sheet draws itself, once. */
@@ -496,7 +557,10 @@
   <div class="wrap hero">
     <div class="cols">
       <div>
-        <h1>Every good build starts as a drawing.</h1>
+        <h1 class="drawn">
+          <span class="drawn-base">Every good build starts as a drawing.</span>
+          <span class="drawn-grid" aria-hidden="true">Every good build starts as a drawing.</span>
+        </h1>
         <p class="sub">
           Foreman makes your agent do the drawing first: the interview, the decisions,
           the locked system, the brief. Then the code, then the domain, then indexed.
@@ -798,6 +862,23 @@ cp -r Foreman/plugins/foreman/skills/foreman ~/.agents/skills/</pre>
       root.dataset.theme = next;
       label(next);
       try { localStorage.setItem('foreman-theme', next); } catch (e) {}
+    });
+  })();
+
+  // Track the cursor across the headline so the blueprint reveal is centred on
+  // it. Bound only where hover exists, so phones never pay for the listener.
+  (function () {
+    const h = document.querySelector('.drawn');
+    if (!h || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    let frame = 0;
+    h.addEventListener('pointermove', e => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const r = h.getBoundingClientRect();
+        h.style.setProperty('--mx', (e.clientX - r.left).toFixed(1) + 'px');
+        h.style.setProperty('--my', (e.clientY - r.top).toFixed(1) + 'px');
+      });
     });
   })();
 
